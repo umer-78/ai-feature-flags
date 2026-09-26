@@ -1,0 +1,22 @@
+# Model versions with recorded answers in HELM Lite. A "pair" is an upgrade a team might
+# ship: the version in production (base) and the one replacing it (candidate).
+versions:
+  gpt-4o-2024-05-13: {helm: openai_gpt-4o-2024-05-13, release: v1.4.0}
+  gpt-4o-2024-08-06: {helm: openai_gpt-4o-2024-08-06, release: v1.10.0}
+  gemini-1.5-pro-001: {helm: google_gemini-1.5-pro-001, release: v1.5.0}
+  gemini-1.5-pro-002: {helm: google_gemini-1.5-pro-002, release: v1.10.0}
+  gemini-1.5-flash-001: {helm: google_gemini-1.5-flash-001, release: v1.5.0}
+  gemini-1.5-flash-002: {helm: google_gemini-1.5-flash-002, release: v1.10.0}
+  gemini-1.0-pro-001: {helm: google_gemini-1.0-pro-001, release: v1.3.0}
+  gemini-1.0-pro-002: {helm: google_gemini-1.0-pro-002, release: v1.5.0}
+  mistral-large-2402: {helm: mistralai_mistral-large-2402, release: v1.3.0}
+  mistral-large-2407: {helm: mistralai_mistral-large-2407, release: v1.6.0}
+  llama-3-70b: {helm: meta_llama-3-70b, release: v1.2.0}
+  llama-3.1-70b-instruct: {helm: meta_llama-3.1-70b-instruct-turbo, release: v1.7.0}
+pairs:
+  - [gpt-4o-2024-05-13, gpt-4o-2024-08-06]
+  - [gemini-1.5-pro-001, gemini-1.5-pro-002]
+  - [gemini-1.5-flash-001, gemini-1.5-flash-002]
+  - [gemini-1.0-pro-001, gemini-1.0-pro-002]
+  - [mistral-large-2402, mistral-large-2407]
+  - [llama-3-70b, llama-3.1-70b-instruct]

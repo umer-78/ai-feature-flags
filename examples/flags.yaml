@@ -1,0 +1,18 @@
+# Which model drafts support replies. The application reports a 0-1 score per reply
+# (1 if the customer accepted it, or a grader's score) with the reply's topic as the segment.
+flags:
+  support-reply-model:
+    variants:
+      control: {model: gpt-4o-2024-05-13, temperature: 0}
+      candidate: {model: gpt-4o-2024-08-06, temperature: 0}
+    control: control
+    candidate: candidate
+    rules:
+      - if: {user: [qa-1, qa-2]}     # the QA team always sees the candidate
+        serve: candidate
+      - if: {plan: enterprise}        # enterprise accounts stay on control
+        serve: control
+    rollout:
+      stages: [1, 5, 25, 50]          # percent of users on the candidate; after the last stage, 100%
+      stage_requests: 20000           # scored requests per stage
+      segments: [billing, shipping, returns]

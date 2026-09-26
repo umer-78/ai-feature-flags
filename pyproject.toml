@@ -1,0 +1,20 @@
+[project]
+name = "ai-feature-flags"
+version = "0.1.0"
+description = "Feature flags for AI features: staged rollouts of a new model or prompt that roll back on a measured regression"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["numpy==2.4.6", "scipy==1.17.1", "pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["flags"]
+
+[tool.setuptools.package-data]
+flags = ["versions.yaml"]
