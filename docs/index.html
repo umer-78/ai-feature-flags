@@ -36,7 +36,7 @@
       <section class="card" id="rollout">
         <h2>Roll out an upgrade</h2>
         <p class="sub">Each request draws a question the way the bench does (only which version got it right matters, so the page carries those counts per task) and a user whose bucket decides the arm. Every 50 requests the canary checks each guardrail's evidence that the candidate is worse than control by more than the tolerance; crossing the line rolls it back. Stages last 20,000 requests.</p>
-        <div class="controls"><label for="pair">Upgrade</label><select id="pair"></select></div>
+        <div class="controls"><label for="pair">Upgrade</label><select id="pair" data-fx-step></select></div>
         <div class="controls"><label>Guardrails</label><div id="guards"></div><label>Tolerance</label><div id="tol"></div><button class="btn primary" id="run" type="button">Run again</button></div>
         <div class="steps" id="stages" aria-live="polite"></div>
         <div id="ev" style="margin-top:12px"></div>

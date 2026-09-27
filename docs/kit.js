@@ -79,7 +79,9 @@ export function table(el, cols, rows, opts = {}) {
     const v = c.fmt ? c.fmt(r[c.key], r) : r[c.key];
     return `<td${c.num ? ' class="num"' : ''}>${c.html ? v : esc(v ?? '')}</td>`;
   }).join('') + '</tr>').join('');
-  el.innerHTML = `<div class="tbl"><button type="button" class="dl" data-dl="csv" aria-label="Download this table as CSV" title="Download CSV">CSV</button><div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div></div>`;
+  // a table wider than the screen scrolls sideways, so keyboard users can focus it to scroll
+  const label = opts.label || el.closest('section')?.querySelector('h2, h3')?.textContent.trim() || 'Table';
+  el.innerHTML = `<div class="tbl"><button type="button" class="dl" data-dl="csv" aria-label="Download this table as CSV" title="Download CSV">CSV</button><div class="scroll" tabindex="0" role="region" aria-label="${esc(label)}"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div></div>`;
 }
 
 function niceTicks(min, max, n = 5) {
