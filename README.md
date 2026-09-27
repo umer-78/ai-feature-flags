@@ -1,5 +1,7 @@
 # ai-feature-flags
 
+[![AI Feature Flags: the live demo](.github/preview.jpg)](https://umer-78.github.io/ai-feature-flags/)
+
 **Live demo:** https://umer-78.github.io/ai-feature-flags/ (roll a real model upgrade out in your browser and watch the guardrails)
 
 Feature flags for AI features. You roll out a new model or prompt to 1%, 5%, 25% and then 50% of users. Each served request is scored, and the candidate is compared against the current version while the rollout runs. If it is measurably worse, overall or on any single segment, the flag rolls back to control by itself.
