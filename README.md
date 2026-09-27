@@ -1,5 +1,7 @@
 # ai-feature-flags
 
+**Live demo:** https://umer-78.github.io/ai-feature-flags/ (roll a real model upgrade out in your browser and watch the guardrails)
+
 Feature flags for AI features. You roll out a new model or prompt to 1%, 5%, 25% and then 50% of users. Each served request is scored, and the candidate is compared against the current version while the rollout runs. If it is measurably worse, overall or on any single segment, the flag rolls back to control by itself.
 
 The rollout was replayed on real recorded answers from six model upgrades (HELM Lite). Results:
@@ -99,7 +101,7 @@ python -m flags replay gemini-1.5-flash-001 gemini-1.5-flash-002
 #   request 10,200: rolled back: gsm8k -42.9 points
 ```
 
-Rerun the benchmark with `python -m flags bench` (about a minute once the data is cached). HELM Lite's public results are downloaded on first use into `~/.cache/flags`; nothing is committed.
+Rerun the benchmark with `python -m flags bench` (about a minute once the data is cached), and the live demo's data with `python -m flags.demo`. HELM Lite's public results are downloaded on first use into `~/.cache/flags`; nothing is committed.
 
 ## Layout
 

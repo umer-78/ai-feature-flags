@@ -1,0 +1,489 @@
+{
+ "summary": {
+  "rollout": {
+   "stages": [
+    1,
+    5,
+    25,
+    50
+   ],
+   "stage_requests": 20000
+  },
+  "upgrades": [
+   {
+    "base": "gpt-4o-2024-05-13",
+    "candidate": "gpt-4o-2024-08-06",
+    "guardrails": "overall",
+    "control": 0.7732366512854317,
+    "candidate_score": 0.7747747747747747,
+    "rolled_back": 0,
+    "runs": 100,
+    "fired": [],
+    "median_rollback_request": null,
+    "median_rollback_stage": null,
+    "median_served": 16133.0,
+    "median_extra_wrong": -22.5,
+    "direct_switch_extra_wrong": -123.04987914744103
+   },
+   {
+    "base": "gpt-4o-2024-05-13",
+    "candidate": "gpt-4o-2024-08-06",
+    "guardrails": "segments",
+    "control": 0.7732366512854317,
+    "candidate_score": 0.7747747747747747,
+    "rolled_back": 1,
+    "runs": 100,
+    "fired": [
+     "openbookqa"
+    ],
+    "median_rollback_request": 22000.0,
+    "median_rollback_stage": 5,
+    "median_served": 16131.5,
+    "median_extra_wrong": -22.0,
+    "direct_switch_extra_wrong": -123.04987914744103
+   },
+   {
+    "base": "gemini-1.5-pro-001",
+    "candidate": "gemini-1.5-pro-002",
+    "guardrails": "overall",
+    "control": 0.7778510217534608,
+    "candidate_score": 0.7864205669083718,
+    "rolled_back": 0,
+    "runs": 100,
+    "fired": [],
+    "median_rollback_request": null,
+    "median_rollback_stage": null,
+    "median_served": 16133.0,
+    "median_extra_wrong": -141.0,
+    "direct_switch_extra_wrong": -685.5636123928832
+   },
+   {
+    "base": "gemini-1.5-pro-001",
+    "candidate": "gemini-1.5-pro-002",
+    "guardrails": "segments",
+    "control": 0.7778510217534608,
+    "candidate_score": 0.7864205669083718,
+    "rolled_back": 0,
+    "runs": 100,
+    "fired": [],
+    "median_rollback_request": null,
+    "median_rollback_stage": null,
+    "median_served": 16133.0,
+    "median_extra_wrong": -141.0,
+    "direct_switch_extra_wrong": -685.5636123928832
+   },
+   {
+    "base": "gemini-1.5-flash-001",
+    "candidate": "gemini-1.5-flash-002",
+    "guardrails": "overall",
+    "control": 0.7084157328059767,
+    "candidate_score": 0.6262359920896506,
+    "rolled_back": 100,
+    "runs": 100,
+    "fired": [
+     "overall"
+    ],
+    "median_rollback_request": 21025.0,
+    "median_rollback_stage": 5,
+    "median_served": 266.0,
+    "median_extra_wrong": 25.5,
+    "direct_switch_extra_wrong": 6574.379257306085
+   },
+   {
+    "base": "gemini-1.5-flash-001",
+    "candidate": "gemini-1.5-flash-002",
+    "guardrails": "segments",
+    "control": 0.7084157328059767,
+    "candidate_score": 0.6262359920896506,
+    "rolled_back": 100,
+    "runs": 100,
+    "fired": [
+     "gsm8k",
+     "overall"
+    ],
+    "median_rollback_request": 11350.0,
+    "median_rollback_stage": 1,
+    "median_served": 120.5,
+    "median_extra_wrong": 10.0,
+    "direct_switch_extra_wrong": 6574.379257306085
+   },
+   {
+    "base": "gemini-1.0-pro-001",
+    "candidate": "gemini-1.0-pro-002",
+    "guardrails": "overall",
+    "control": 0.6084377059986816,
+    "candidate_score": 0.5750384530872336,
+    "rolled_back": 69,
+    "runs": 100,
+    "fired": [
+     "overall"
+    ],
+    "median_rollback_request": 57700.0,
+    "median_rollback_stage": 25,
+    "median_served": 8465.5,
+    "median_extra_wrong": 309.0,
+    "direct_switch_extra_wrong": 2671.940232915846
+   },
+   {
+    "base": "gemini-1.0-pro-001",
+    "candidate": "gemini-1.0-pro-002",
+    "guardrails": "segments",
+    "control": 0.6084377059986816,
+    "candidate_score": 0.5750384530872336,
+    "rolled_back": 100,
+    "runs": 100,
+    "fired": [
+     "legalbench",
+     "mmlu",
+     "openbookqa",
+     "overall"
+    ],
+    "median_rollback_request": 39625.0,
+    "median_rollback_stage": 5,
+    "median_served": 1228.0,
+    "median_extra_wrong": 41.5,
+    "direct_switch_extra_wrong": 2671.940232915846
+   },
+   {
+    "base": "mistral-large-2402",
+    "candidate": "mistral-large-2407",
+    "guardrails": "overall",
+    "control": 0.6276438760452533,
+    "candidate_score": 0.6871618298081653,
+    "rolled_back": 0,
+    "runs": 100,
+    "fired": [],
+    "median_rollback_request": null,
+    "median_rollback_stage": null,
+    "median_served": 16133.0,
+    "median_extra_wrong": -954.0,
+    "direct_switch_extra_wrong": -4761.436301032962
+   },
+   {
+    "base": "mistral-large-2402",
+    "candidate": "mistral-large-2407",
+    "guardrails": "segments",
+    "control": 0.6276438760452533,
+    "candidate_score": 0.6871618298081653,
+    "rolled_back": 91,
+    "runs": 100,
+    "fired": [
+     "math"
+    ],
+    "median_rollback_request": 55000.0,
+    "median_rollback_stage": 25,
+    "median_served": 5214.0,
+    "median_extra_wrong": -288.5,
+    "direct_switch_extra_wrong": -4761.436301032962
+   },
+   {
+    "base": "llama-3-70b",
+    "candidate": "llama-3.1-70b-instruct",
+    "guardrails": "overall",
+    "control": 0.7470885519666007,
+    "candidate_score": 0.7400571303010327,
+    "rolled_back": 1,
+    "runs": 100,
+    "fired": [
+     "overall"
+    ],
+    "median_rollback_request": 25600.0,
+    "median_rollback_stage": 5,
+    "median_served": 16131.5,
+    "median_extra_wrong": 129.0,
+    "direct_switch_extra_wrong": 562.5137332454422
+   },
+   {
+    "base": "llama-3-70b",
+    "candidate": "llama-3.1-70b-instruct",
+    "guardrails": "segments",
+    "control": 0.7470885519666007,
+    "candidate_score": 0.7400571303010327,
+    "rolled_back": 100,
+    "runs": 100,
+    "fired": [
+     "legalbench"
+    ],
+    "median_rollback_request": 27450.0,
+    "median_rollback_stage": 5,
+    "median_served": 602.5,
+    "median_extra_wrong": 5.0,
+    "direct_switch_extra_wrong": 562.5137332454422
+   }
+  ],
+  "identical": [
+   {
+    "method": "always_valid",
+    "guardrails": "overall",
+    "false_rollbacks": 45,
+    "runs": 1200
+   },
+   {
+    "method": "always_valid",
+    "guardrails": "segments",
+    "false_rollbacks": 51,
+    "runs": 1200
+   },
+   {
+    "method": "naive",
+    "guardrails": "overall",
+    "false_rollbacks": 551,
+    "runs": 1200
+   },
+   {
+    "method": "naive",
+    "guardrails": "segments",
+    "false_rollbacks": 612,
+    "runs": 1200
+   }
+  ]
+ },
+ "pairs": [
+  {
+   "base": "gpt-4o-2024-05-13",
+   "candidate": "gpt-4o-2024-08-06",
+   "tasks": [
+    {
+     "task": "gsm8k",
+     "both": 885,
+     "broke": 20,
+     "fixed": 24,
+     "neither": 71
+    },
+    {
+     "task": "legalbench",
+     "both": 1227,
+     "broke": 98,
+     "fixed": 99,
+     "neither": 623
+    },
+    {
+     "task": "math",
+     "both": 365,
+     "broke": 13,
+     "fixed": 19,
+     "neither": 40
+    },
+    {
+     "task": "mmlu",
+     "both": 405,
+     "broke": 23,
+     "fixed": 18,
+     "neither": 121
+    },
+    {
+     "task": "openbookqa",
+     "both": 480,
+     "broke": 3,
+     "fixed": 4,
+     "neither": 13
+    }
+   ]
+  },
+  {
+   "base": "gemini-1.5-pro-001",
+   "candidate": "gemini-1.5-pro-002",
+   "tasks": [
+    {
+     "task": "gsm8k",
+     "both": 724,
+     "broke": 112,
+     "fixed": 93,
+     "neither": 71
+    },
+    {
+     "task": "legalbench",
+     "both": 1321,
+     "broke": 115,
+     "fixed": 106,
+     "neither": 505
+    },
+    {
+     "task": "math",
+     "both": 372,
+     "broke": 5,
+     "fixed": 36,
+     "neither": 24
+    },
+    {
+     "task": "mmlu",
+     "both": 416,
+     "broke": 24,
+     "fixed": 35,
+     "neither": 92
+    },
+    {
+     "task": "openbookqa",
+     "both": 444,
+     "broke": 7,
+     "fixed": 32,
+     "neither": 17
+    }
+   ]
+  },
+  {
+   "base": "gemini-1.5-flash-001",
+   "candidate": "gemini-1.5-flash-002",
+   "tasks": [
+    {
+     "task": "gsm8k",
+     "both": 297,
+     "broke": 488,
+     "fixed": 31,
+     "neither": 184
+    },
+    {
+     "task": "legalbench",
+     "both": 1119,
+     "broke": 114,
+     "fixed": 155,
+     "neither": 659
+    },
+    {
+     "task": "math",
+     "both": 337,
+     "broke": 7,
+     "fixed": 69,
+     "neither": 24
+    },
+    {
+     "task": "mmlu",
+     "both": 338,
+     "broke": 60,
+     "fixed": 47,
+     "neither": 122
+    },
+    {
+     "task": "openbookqa",
+     "both": 445,
+     "broke": 19,
+     "fixed": 12,
+     "neither": 24
+    }
+   ]
+  },
+  {
+   "base": "gemini-1.0-pro-001",
+   "candidate": "gemini-1.0-pro-002",
+   "tasks": [
+    {
+     "task": "gsm8k",
+     "both": 702,
+     "broke": 81,
+     "fixed": 114,
+     "neither": 103
+    },
+    {
+     "task": "legalbench",
+     "both": 495,
+     "broke": 411,
+     "fixed": 298,
+     "neither": 843
+    },
+    {
+     "task": "math",
+     "both": 246,
+     "broke": 41,
+     "fixed": 67,
+     "neither": 83
+    },
+    {
+     "task": "mmlu",
+     "both": 254,
+     "broke": 97,
+     "fixed": 47,
+     "neither": 169
+    },
+    {
+     "task": "openbookqa",
+     "both": 372,
+     "broke": 70,
+     "fixed": 22,
+     "neither": 36
+    }
+   ]
+  },
+  {
+   "base": "mistral-large-2402",
+   "candidate": "mistral-large-2407",
+   "tasks": [
+    {
+     "task": "gsm8k",
+     "both": 663,
+     "broke": 31,
+     "fixed": 249,
+     "neither": 57
+    },
+    {
+     "task": "legalbench",
+     "both": 516,
+     "broke": 184,
+     "fixed": 168,
+     "neither": 694
+    },
+    {
+     "task": "math",
+     "both": 269,
+     "broke": 78,
+     "fixed": 46,
+     "neither": 44
+    },
+    {
+     "task": "mmlu",
+     "both": 338,
+     "broke": 26,
+     "fixed": 79,
+     "neither": 124
+    },
+    {
+     "task": "openbookqa",
+     "both": 435,
+     "broke": 12,
+     "fixed": 31,
+     "neither": 22
+    }
+   ]
+  },
+  {
+   "base": "llama-3-70b",
+   "candidate": "llama-3.1-70b-instruct",
+   "tasks": [
+    {
+     "task": "gsm8k",
+     "both": 787,
+     "broke": 18,
+     "fixed": 151,
+     "neither": 44
+    },
+    {
+     "task": "legalbench",
+     "both": 953,
+     "broke": 463,
+     "fixed": 240,
+     "neither": 391
+    },
+    {
+     "task": "math",
+     "both": 281,
+     "broke": 31,
+     "fixed": 83,
+     "neither": 42
+    },
+    {
+     "task": "mmlu",
+     "both": 367,
+     "broke": 33,
+     "fixed": 37,
+     "neither": 130
+    },
+    {
+     "task": "openbookqa",
+     "both": 452,
+     "broke": 15,
+     "fixed": 17,
+     "neither": 16
+    }
+   ]
+  }
+ ]
+}
