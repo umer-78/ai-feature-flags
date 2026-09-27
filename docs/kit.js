@@ -55,6 +55,7 @@ export function bars(el, rows, opts = {}) {
   const max = opts.max ?? Math.max(...rows.map((r) => Math.abs(r.value)), 1e-9);
   const fmt = opts.fmt || ((v) => String(v));
   el.classList.add('bars');
+  el.style.setProperty('--valw', `${Math.min(9, Math.max(4.5, ...rows.map((r) => String(r.text ?? fmt(r.value)).length * 0.62 + 0.4)))}em`);
   el.innerHTML = rows.map((r) => `<div class="bar${r.dim ? ' dim' : ''}" title="${esc(r.title || r.label)}"><span class="name">${esc(r.label)}</span>` +
     `<span class="track"><span class="fill" style="display:block;width:${Math.max(0, Math.min(100, (100 * Math.abs(r.value)) / max)).toFixed(2)}%;--c:${r.color || 'var(--accent)'}"></span></span>` +
     `<span class="val">${esc(r.text ?? fmt(r.value))}</span></div>`).join('');
@@ -114,15 +115,16 @@ export function xy(el, spec) {
     let y0 = Y.min ?? Math.min(...ys), y1 = Y.max ?? Math.max(...ys);
     if (!X.log && x0 === x1) { x0 -= 1; x1 += 1; }
     if (y0 === y1) { y0 -= 1; y1 += 1; }
-    if (Y.pad !== 0 && Y.min == null) y0 -= (y1 - y0) * 0.06;
-    if (Y.pad !== 0 && Y.max == null) y1 += (y1 - y0) * 0.06;
+    if (!Y.log && Y.pad !== 0 && Y.min == null) y0 -= (y1 - y0) * 0.06;
+    if (!Y.log && Y.pad !== 0 && Y.max == null) y1 += (y1 - y0) * 0.06;
     const xt = X.ticks || (X.log ? logTicks(x0, x1) : niceTicks(x0, x1, W < 480 ? 4 : 6));
-    const yt = Y.ticks || niceTicks(y0, y1, 5);
+    const yt = Y.ticks || (Y.log ? logTicks(y0, y1).filter((t, i, a) => a.length < 8 || /^[1]/.test(String(t))) : niceTicks(y0, y1, 5));
     const fx = X.fmt || String, fy = Y.fmt || String;
-    const ml = Math.max(...yt.map((t) => fy(t).length)) * 6.4 + 14, mr = spec.marginRight ?? 16, mt = 12, mb = X.label ? 42 : 26;
+    const ml = Math.max(0, ...yt.map((t) => fy(t).length)) * 6.4 + 14, mr = spec.marginRight ?? 16, mt = 12, mb = X.label ? 42 : 26;
     const sx = (v) => ml + (X.log ? (Math.log(v) - Math.log(x0)) / (Math.log(x1) - Math.log(x0)) : (v - x0) / (x1 - x0)) * (W - ml - mr);
-    const sy = (v) => mt + (1 - (v - y0) / (y1 - y0)) * (H - mt - mb);
-    let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(spec.label || '')}">`;
+    const sy = (v) => mt + (1 - (Y.log ? (Math.log(Math.max(v, y0 * 1e-3)) - Math.log(y0)) / (Math.log(y1) - Math.log(y0)) : (v - y0) / (y1 - y0))) * (H - mt - mb);
+    const clip = `c${Math.random().toString(36).slice(2, 8)}`;
+    let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(spec.label || '')}"><defs><clipPath id="${clip}"><rect x="${ml - 8}" y="${mt - 8}" width="${W - ml - mr + 16}" height="${H - mt - mb + 16}"/></clipPath></defs>`;
     s += '<g class="grid">' + yt.map((t) => `<line x1="${ml}" x2="${W - mr}" y1="${sy(t)}" y2="${sy(t)}"/>`).join('') + '</g>';
     s += yt.map((t) => `<text x="${ml - 8}" y="${sy(t) + 4}" text-anchor="end">${esc(fy(t))}</text>`).join('');
     s += xt.map((t) => `<text x="${sx(t)}" y="${H - mb + 16}" text-anchor="middle">${esc(fx(t))}</text>`).join('');
@@ -138,7 +140,7 @@ export function xy(el, spec) {
       const c = se.color || `var(--c${(si % 6) + 1})`;
       if (se.line !== false && se.points.length > 1) {
         const d = se.points.map((p, i) => `${i ? 'L' : 'M'}${sx(p.x).toFixed(1)},${sy(p.y).toFixed(1)}`).join('');
-        s += `<path d="${d}" fill="none" style="stroke:${c};stroke-width:${se.width || 2.2}${se.dash ? ';stroke-dasharray:5 4' : ''}"><title>${esc(se.name)}</title></path>`;
+        s += `<path clip-path="url(#${clip})" d="${d}" fill="none" style="stroke:${c};stroke-width:${se.width || 2.2}${se.dash ? ';stroke-dasharray:5 4' : ''}"><title>${esc(se.name)}</title></path>`;
       }
       if (se.dots) se.points.forEach((p, pi) => {
         s += `<circle class="pt" tabindex="0" data-s="${si}" data-p="${pi}" cx="${sx(p.x)}" cy="${sy(p.y)}" r="${p.r || se.r || 5}" style="fill:${p.color || c};stroke:var(--surface);stroke-width:1.5"><title>${esc(p.title || p.label || se.name)}</title></circle>`;
@@ -177,6 +179,7 @@ export function diverge(el, rows, opts = {}) {
   const max = opts.max ?? Math.max(...rows.map((r) => Math.abs(r.value)), 1e-9);
   const fmt = opts.fmt || ((v) => String(v));
   el.classList.add('bars');
+  el.style.setProperty('--valw', `${Math.min(9, Math.max(4.5, ...rows.map((r) => String(r.text ?? fmt(r.value)).length * 0.62 + 0.4)))}em`);
   el.innerHTML = rows.map((r) => {
     const w = Math.min(50, (50 * Math.abs(r.value)) / max);
     const c = r.color || (r.value < 0 ? 'var(--bad)' : 'var(--good)');
