@@ -116,3 +116,12 @@ button.step { cursor: pointer; color: var(--text); }
 .btn:disabled { opacity: .45; cursor: default; }
 input.text { flex: 1 1 280px; min-width: 0; font: 15px var(--font); color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; }
 .cropbox > div { border: 1px solid var(--line); border-radius: 8px; background-color: #fff; max-width: 100%; }
+
+/* download buttons: quiet until the chart or table is hovered or the button is focused */
+.dl { position: absolute; top: -4px; right: 0; z-index: 2; padding: 3px 9px; border-radius: 8px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 85%, transparent);
+  color: var(--muted); font: 700 11px/1.4 var(--mono); letter-spacing: .04em; cursor: pointer; opacity: .55; transition: opacity .2s, color .2s, border-color .2s; }
+.dl:hover, .dl:focus-visible { opacity: 1; color: var(--text); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+.chart:hover .dl, .tbl:hover .dl { opacity: 1; }
+.tbl { position: relative; padding-top: 26px; }
+.tbl > .dl { top: 0; }
+@media print { .dl { display: none; } }

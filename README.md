@@ -1,5 +1,7 @@
 # ai-feature-flags
 
+[![CI](https://github.com/umer-78/ai-feature-flags/actions/workflows/ci.yml/badge.svg)](https://github.com/umer-78/ai-feature-flags/actions/workflows/ci.yml)
+
 [![AI Feature Flags: the live demo](.github/preview.jpg)](https://umer-78.github.io/ai-feature-flags/)
 
 **Live demo:** https://umer-78.github.io/ai-feature-flags/ (roll a real model upgrade out in your browser and watch the guardrails)
@@ -114,3 +116,7 @@ Rerun the benchmark with `python -m flags bench` (about a minute once the data i
   - `live` sends one request at a time through the production code.
   - `fast` is a vectorized copy for the bench; tests check that the two make identical decisions.
 - `flags/data.py` and `flags/versions.yaml`: the recorded answers.
+
+## Licence
+
+MIT licence (see [LICENSE](LICENSE)). The data it evaluates (HELM Lite's recorded results) keeps its own licence and is downloaded when you run it.

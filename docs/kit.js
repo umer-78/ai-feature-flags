@@ -79,7 +79,7 @@ export function table(el, cols, rows, opts = {}) {
     const v = c.fmt ? c.fmt(r[c.key], r) : r[c.key];
     return `<td${c.num ? ' class="num"' : ''}>${c.html ? v : esc(v ?? '')}</td>`;
   }).join('') + '</tr>').join('');
-  el.innerHTML = `<div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+  el.innerHTML = `<div class="tbl"><button type="button" class="dl" data-dl="csv" aria-label="Download this table as CSV" title="Download CSV">CSV</button><div class="scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div></div>`;
 }
 
 function niceTicks(min, max, n = 5) {
@@ -173,7 +173,7 @@ export function xy(el, spec) {
         break;
       }
     }
-    el.innerHTML = s + '</svg>';
+    el.innerHTML = s + '</svg><button type="button" class="dl" data-dl="svg" aria-label="Download this chart as SVG" title="Download SVG">SVG</button>';
     if (spec.onPick) {
       const pick = (e) => { const c = e.target.closest('circle.pt'); if (c) spec.onPick(spec.series[c.dataset.s].points[c.dataset.p], spec.series[c.dataset.s]); };
       el.onclick = pick;
@@ -204,3 +204,46 @@ export function diverge(el, rows, opts = {}) {
   }).join('');
   if (grow) growIn(el);
 }
+
+// Downloads: every chart as an SVG file with its colours resolved, every table as CSV.
+const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'data';
+function save(name, type, text) {
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const a = Object.assign(document.createElement('a'), { href: url, download: name });
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+const titleOf = (el) => el.closest('.card')?.querySelector('h2')?.textContent || document.title.split(' ·')[0];
+
+export function svgFile(svg) {
+  const copy = svg.cloneNode(true), live = [svg, ...svg.querySelectorAll('*')], dead = [copy, ...copy.querySelectorAll('*')];
+  live.forEach((node, i) => {
+    const cs = getComputedStyle(node), keep = ['fill', 'stroke', 'stroke-width', 'stroke-dasharray', 'opacity', 'font-family', 'font-size', 'font-weight'];
+    dead[i].setAttribute('style', keep.map((k) => `${k}:${cs.getPropertyValue(k)}`).join(';'));
+    dead[i].removeAttribute('class');
+    dead[i].removeAttribute('pathLength');
+  });
+  copy.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  bg.setAttribute('width', '100%');
+  bg.setAttribute('height', '100%');
+  bg.setAttribute('fill', getComputedStyle(document.body).backgroundColor);
+  copy.prepend(bg);
+  return new XMLSerializer().serializeToString(copy);
+}
+
+function tableCsv(table) {
+  const cell = (c) => { const t = c.textContent.replace(/\s+/g, ' ').trim(); return /[",\n]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
+  return [...table.rows].map((r) => [...r.cells].map(cell).join(',')).join('\n') + '\n';
+}
+
+// one delegated listener serves every download button on the page
+document.addEventListener('click', (e) => {
+  const b = e.target.closest?.('button[data-dl]');
+  if (!b) return;
+  const host = b.parentElement;
+  if (b.dataset.dl === 'svg') { const svg = host.querySelector('svg[role="img"]'); if (svg) save(`${slug(titleOf(host))}.svg`, 'image/svg+xml', svgFile(svg)); }
+  else { const t = host.querySelector('table'); if (t) save(`${slug(titleOf(host))}.csv`, 'text/csv', tableCsv(t)); }
+});
