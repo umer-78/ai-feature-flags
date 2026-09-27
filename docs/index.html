@@ -1,20 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-scene="canary">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI Feature Flags · Umer Hashmi</title>
   <meta name="description" content="Canary rollouts for model upgrades with an always-valid sequential test: roll a real upgrade out in your browser and watch the guardrails.">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="kit.css">
-  <style>:root { --accent: #4f46e5; --on-accent: #fff; } @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent: #a5b4fc; --on-accent: #0f0e0c; } }</style>
+  <link rel="stylesheet" href="fx.css">
+  <style>:root { --accent: #4f46e5; --fx-2: #06b6d4; --fx-3: #22c55e; --on-accent: #fff; } @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent: #a5b4fc; --on-accent: #0f0e0c; } }</style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <a class="crumb" href="https://umer-78.github.io/">← All projects</a>
+    <nav class="fx-nav" aria-label="On this page"><a class="fx-home" href="https://umer-78.github.io/">← All projects</a><a class="fx-gh" href="https://github.com/umer-78/ai-feature-flags">GitHub</a></nav>
+    <header class="fx-hero">
+      <span class="fx-eyebrow">LLM engineering · Python</span>
       <h1>AI Feature Flags</h1>
       <p class="lede">Feature flags for AI changes: a new model version goes to 1%, 5%, 25% and 50% of users, and rolls back on its own the moment it is measurably worse, overall or on any one task. The test stays valid however often it is checked. Below you can run a rollout of six real model upgrades, using how each version actually answered HELM Lite's questions.</p>
       <div class="links"><a class="btn primary" href="#rollout">Run a rollout</a><a class="btn" href="https://github.com/umer-78/ai-feature-flags">Code and method</a></div>
+      <div class="fx-tags" aria-hidden="true"><div><span>python</span><span>llm</span><span>feature-flags</span><span>canary</span><span>statistics</span><span>sequential-testing</span><span>python</span><span>llm</span><span>feature-flags</span><span>canary</span><span>statistics</span><span>sequential-testing</span></div></div>
     </header>
     <main>
       <section class="kpis" id="kpis"></section>
@@ -42,5 +49,6 @@
     <footer>Built by <a href="https://github.com/umer-78">Umer Hashmi</a> · Outcomes from <a href="https://crfm.stanford.edu/helm/lite/">HELM Lite</a> (Stanford CRFM), downloaded at run time; this page holds only per-task counts of which version got a question right · Test: mixture likelihood ratio after Johari et al., “Peeking at A/B Tests” (2017)</footer>
   </div>
   <script type="module" src="app.js"></script>
+  <script type="module" src="fx.js"></script>
 </body>
 </html>
