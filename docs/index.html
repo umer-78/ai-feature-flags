@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en" data-scene="canary">
+<html lang="en" data-scene="canary" data-look="sora" data-hero="right" data-card="brutal" data-motif="diag" data-backdrop="grid">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI Feature Flags · Umer Hashmi</title>
   <meta name="description" content="Canary rollouts for model upgrades with an always-valid sequential test: roll a real upgrade out in your browser and watch the guardrails.">
-  <meta name="theme-color" content="#4f46e5">
+  <meta name="theme-color" content="#7963d2">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Umer Hashmi · projects">
   <meta property="og:title" content="AI Feature Flags · Umer Hashmi">
@@ -16,10 +16,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&family=Fira+Code:wght@400;600&display=swap" id="fx-fonts">
   <link rel="stylesheet" href="kit.css">
   <link rel="stylesheet" href="fx.css">
   <style>:root { --accent: #4f46e5; --fx-2: #06b6d4; --fx-3: #22c55e; --on-accent: #fff; } @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent: #a5b4fc; --on-accent: #0f0e0c; } }</style>
+<style id="fx-look">:root[data-look] { --font: 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif; --fx-display: 'Sora', system-ui, sans-serif; --mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; --fx-display-weight: 700; --fx-tracking: -0.035em; --fx-title-case: none; --fx-radius: 0px; --fx-hero-radius: 0px; --fx-control-radius: 0px; --accent: #7963d2; --accent-hover: #6851bd; --accent-soft: #f1f0ff; --accent-glow: rgb(121 99 210 / 0.16); --on-accent: #ffffff; --fx-2: #8d8c07; --fx-3: #c87bdd; --bg: #f9f8ff; --bg-elevated: #fdfdff; --surface: #fefeff; --surface-2: #f3f2fd; --surface-3: #eaeaf6; --border: #dddcea; --border-strong: #c3c2d1; --line: #dddcea; }
+@media (prefers-color-scheme: dark) { :root[data-look]:not([data-theme="light"]) { --accent: #a08ffb; --accent-hover: #b2a7fe; --accent-soft: rgb(160 143 251 / 0.14); --accent-glow: rgb(160 143 251 / 0.2); --on-accent: #110f1e; --fx-2: #b8b83f; --fx-3: #e49ff7; --bg: #0f0e18; --bg-elevated: #16141f; --surface: #191824; --surface-2: #21202d; --surface-3: #2b2937; --border: #302f3a; --border-strong: #42414d; --line: #302f3a; } }
+:root[data-look][data-theme="dark"] { --accent: #a08ffb; --accent-hover: #b2a7fe; --accent-soft: rgb(160 143 251 / 0.14); --accent-glow: rgb(160 143 251 / 0.2); --on-accent: #110f1e; --fx-2: #b8b83f; --fx-3: #e49ff7; --bg: #0f0e18; --bg-elevated: #16141f; --surface: #191824; --surface-2: #21202d; --surface-3: #2b2937; --border: #302f3a; --border-strong: #42414d; --line: #302f3a; }</style>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js" data-fx>
+<link rel="modulepreload" href="fx3d.js" data-fx>
 </head>
 <body>
   <div class="wrap">
